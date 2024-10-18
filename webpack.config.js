@@ -4,7 +4,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: {
         popup: './src/popup/popup.ts',
-        background: './src/background.ts'
+        background: './src/background.ts',
+        content: './src/content/content.ts'
     },
     module: {
         rules: [
@@ -31,4 +32,9 @@ module.exports = {
             ],
         }),
     ],
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
 };
