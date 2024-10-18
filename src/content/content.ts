@@ -37,13 +37,16 @@ class SelectionToolbar {
         const button = document.createElement('button');
         button.textContent = text;
         button.style.marginRight = '5px';
-        button.addEventListener('click', onClick);
+        button.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent hiding toolbar when clicking on it
+            onClick();
+        });
         return button;
     }
 
     private attachListeners(): void {
-        document.addEventListener('selectionchange', () => this.handleSelectionChange());
-        document.addEventListener('click', (e) => this.handleClickOutside(e));
+        document.addEventListener('mouseup', () => this.handleSelectionChange());
+        document.addEventListener('mousedown', (e) => this.handleClickOutside(e));
     }
 
     private handleSelectionChange(): void {
@@ -52,8 +55,6 @@ class SelectionToolbar {
             const range = selection.getRangeAt(0);
             const rect = range.getBoundingClientRect();
             this.showToolbar(rect);
-        } else {
-            this.hideToolbar();
         }
     }
 
@@ -77,25 +78,24 @@ class SelectionToolbar {
 // Implementation of toolbar options
 const highlightSelection = (): void => {
     const selection = window.getSelection();
-    if (selection) {
+    if (selection && !selection.isCollapsed) {
         const range = selection.getRangeAt(0);
         const span = document.createElement('span');
         span.style.backgroundColor = 'yellow';
         range.surroundContents(span);
+        // Clear the selection after highlighting
+        selection.removeAllRanges();
     }
 };
 
 const translateSelection = (): void => {
     const selection = window.getSelection();
-    if (selection) {
+    if (selection && !selection.isCollapsed) {
         const text = selection.toString();
         // Here you would typically send this text to a translation service
-        // For this example, we'll just show an alert
         alert(`Translation requested for: "${text}"`);
-        // In a real implementation, you might do something like:
-        // chrome.runtime.sendMessage({action: 'translate', text: text}, response => {
-        //     console.log('Translated text:', response.translatedText);
-        // });
+        // Clear the selection after action
+        selection.removeAllRanges();
     }
 };
 
