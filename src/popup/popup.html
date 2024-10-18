@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open in Freedium - Options</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="container">
+    <h1>Open in Freedium</h1>
+    <p class="description">
+        By default, this extension can open pages on "medium.com" in Freedium.
+        Add additional patterns below for the extension to handle.
+    </p>
+    <div class="input-section">
+        <label for="custom_patterns">Custom Patterns:</label>
+        <textarea
+                id="custom_patterns"
+                name="custom_patterns"
+                rows="6"
+                placeholder="*://*.example.com/*"
+        ></textarea>
+        <p class="hint">One pattern per line. Wildcards (*) are supported.</p>
+    </div>
+    <div class="examples">
+        <h2>Examples:</h2>
+        <ul>
+            <li><code>*://example.com/*</code></li>
+            <li><code>*://*.example.com/*</code></li>
+            <li><code>*://*.example.com/articles/*</code></li>
+        </ul>
+    </div>
+    <button id="save" class="btn-primary">Save</button>
+    <div id="status" class="status"></div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

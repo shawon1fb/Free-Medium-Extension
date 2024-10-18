@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Ex Freedium",
+  "version": "1.0",
+  "description": "this extension open mediun.com in Freedium",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": false
+  },
+  "icons": {
+    "128": "icon.png",
+    "48": "icon.png",
+    "16": "icon.png",
+    "32": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ],
+  "host_permissions": []
+}
