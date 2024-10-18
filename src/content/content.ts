@@ -35,8 +35,31 @@ class SelectionToolbar {
 
     private createButton(text: string, onClick: () => void): HTMLButtonElement {
         const button = document.createElement('button');
-        button.textContent = text;
-        button.style.marginRight = '5px';
+        // button.textContent = text;
+        // button.style.marginRight = '5px';
+        const img = document.createElement('img');
+
+        // Set the image source
+       // img.src = "https://cdn-icons-png.flaticon.com/512/15481/15481881.png";
+        img.style.width = '20px';  // Adjust the size of the image as needed
+        img.style.height = '20px';  // Adjust the size of the image as needed
+
+        if (text === 'Highlight') {
+            img.src = "   https://cdn-icons-png.flaticon.com/512/1164/1164631.png ";
+            button.style.paddingLeft = '10px';
+            button.style.paddingRight = '5px';
+        } else {
+            img.src = "https://cdn-icons-png.flaticon.com/512/15481/15481881.png";
+            button.style.paddingLeft = '5px';
+            button.style.paddingRight = '10px';
+        }
+
+        button.appendChild(img);
+
+        // add button padding horizontally
+        button.style.paddingLeft = '10px';
+        button.style.paddingRight = '10px';
+
         button.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent hiding toolbar when clicking on it
             onClick();
