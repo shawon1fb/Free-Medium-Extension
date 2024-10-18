@@ -1,3 +1,5 @@
+import {knownMediumDomainPatterns} from "./constanst/donains.urls";
+
 interface ContextMenuCommand {
     title: string;
     type: chrome.contextMenus.ContextItemType;  // Changed from chrome.contextMenus.ItemType
@@ -21,6 +23,7 @@ const CONTEXT_MENU_CONTENTS: ContextMenuContents = {
                 '*://*.medium.com/*',
                 '*://medium.com/*',
                 '*://lifewithoutchildren.com/*',
+                ...knownMediumDomainPatterns
             ],
         },
     ],
@@ -33,6 +36,7 @@ const CONTEXT_MENU_CONTENTS: ContextMenuContents = {
                 '*://*.medium.com/*',
                 '*://medium.com/*',
                 '*://lifewithoutchildren.com/*',
+                ...knownMediumDomainPatterns
             ],
         },
     ],

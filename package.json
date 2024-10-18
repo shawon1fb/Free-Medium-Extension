@@ -1,7 +1,6 @@
 {
   "name": "chrome-extension",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch --config webpack.config.js"
