@@ -23,13 +23,15 @@ class PopupManager {
     private saveOptions(): void {
         const patterns = this.customPatternsElement?.value || '';
 
-        chrome.storage.sync.set(
-            { patterns },
-            () => {
-                this.updateStatus('Options saved.', 'success');
-                this.notifyBackgroundScript();
-            }
-        );
+        if ( patterns !== '') {
+            chrome.storage.sync.set(
+                {patterns},
+                () => {
+                    this.updateStatus('Options saved.', 'success');
+                    this.notifyBackgroundScript();
+                }
+            );
+        }
     }
 
     private restoreOptions(): void {

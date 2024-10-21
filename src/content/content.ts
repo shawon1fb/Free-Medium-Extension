@@ -18,11 +18,13 @@ class SelectionToolbar {
         const toolbar = document.createElement('div');
         toolbar.style.position = 'absolute';
         toolbar.style.display = 'none';
-        toolbar.style.backgroundColor = '#f0f0f0';
-        toolbar.style.border = '1px solid #ccc';
-        toolbar.style.borderRadius = '4px';
-        toolbar.style.padding = '5px';
-        toolbar.style.zIndex = '1000';
+        toolbar.style.backgroundColor = '#1D2939';
+        // toolbar.style.border = '1px solid #ccc';
+        toolbar.style.borderRadius = '8px';
+        toolbar.style.padding = '10px 18px';
+        // toolbar.style.zIndex = '1000';
+        toolbar.style.alignItems = 'center';
+        toolbar.style.gap = '16px';
 
         const highlightBtn = this.createButton('Highlight', () => this.options.highlight());
         const translateBtn = this.createButton('Translate', () => this.options.translate());
@@ -45,11 +47,12 @@ class SelectionToolbar {
         img.style.height = '20px';  // Adjust the size of the image as needed
 
         if (text === 'Highlight') {
-            img.src = "   https://cdn-icons-png.flaticon.com/512/1164/1164631.png ";
+            img.src = chrome.runtime.getURL("edit-04.svg");
+
             button.style.paddingLeft = '10px';
             button.style.paddingRight = '5px';
         } else {
-            img.src = "https://cdn-icons-png.flaticon.com/512/15481/15481881.png";
+            img.src = chrome.runtime.getURL("ion_language-sharp.svg");
             button.style.paddingLeft = '5px';
             button.style.paddingRight = '10px';
         }
@@ -57,8 +60,8 @@ class SelectionToolbar {
         button.appendChild(img);
 
         // add button padding horizontally
-        button.style.paddingLeft = '10px';
-        button.style.paddingRight = '10px';
+        // button.style.paddingLeft = '10px';
+        // button.style.paddingRight = '10px';
 
         button.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent hiding toolbar when clicking on it
