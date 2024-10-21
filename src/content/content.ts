@@ -21,7 +21,7 @@ class SelectionToolbar {
         toolbar.style.backgroundColor = '#1D2939';
         // toolbar.style.border = '1px solid #ccc';
         toolbar.style.borderRadius = '8px';
-        toolbar.style.padding = '10px 18px';
+        toolbar.style.padding = '10px 2px';
         // toolbar.style.zIndex = '1000';
         toolbar.style.alignItems = 'center';
         toolbar.style.gap = '16px';
@@ -30,6 +30,7 @@ class SelectionToolbar {
         const translateBtn = this.createButton('Translate', () => this.options.translate());
 
         toolbar.appendChild(highlightBtn);
+        toolbar.appendChild(this.createDivider());
         toolbar.appendChild(translateBtn);
 
         return toolbar;
@@ -37,39 +38,56 @@ class SelectionToolbar {
 
     private createButton(text: string, onClick: () => void): HTMLButtonElement {
         const button = document.createElement('button');
-        // button.textContent = text;
-        // button.style.marginRight = '5px';
         const img = document.createElement('img');
 
         // Set the image source
-       // img.src = "https://cdn-icons-png.flaticon.com/512/15481/15481881.png";
-        img.style.width = '20px';  // Adjust the size of the image as needed
-        img.style.height = '20px';  // Adjust the size of the image as needed
+        img.style.width = '20px';
+        img.style.height = '20px';
+        img.style.display = 'block'; // Prevent image from adding extra space
+        img.style.margin = '0';
+        img.style.padding = '0';
 
         if (text === 'Highlight') {
             img.src = chrome.runtime.getURL("edit-04.svg");
-
-            button.style.paddingLeft = '10px';
-            button.style.paddingRight = '5px';
         } else {
             img.src = chrome.runtime.getURL("ion_language-sharp.svg");
-            button.style.paddingLeft = '5px';
-            button.style.paddingRight = '10px';
         }
 
         button.appendChild(img);
 
-        // add button padding horizontally
-        // button.style.paddingLeft = '10px';
-        // button.style.paddingRight = '10px';
+        // Button styles
+        button.style.display = 'inline-flex';
+        button.style.flexDirection = 'row';
+        button.style.alignItems = 'center';
+        button.style.justifyContent = 'center';
+
+        button.style.margin = '0'; // Remove default margins
+        button.style.backgroundColor = 'transparent';
+        button.style.border = 'none';
+        button.style.outline = 'none';
+        button.style.cursor = 'pointer';
+        button.style.zIndex = '1000';
+        button.style.boxSizing = 'border-box'; // Include padding in width
+        button.style.paddingLeft = '16px';
+        button.style.paddingRight = '16px';
 
         button.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent hiding toolbar when clicking on it
+            e.stopPropagation();
             onClick();
         });
         return button;
     }
 
+    private createDivider(): HTMLDivElement {
+        const divider = document.createElement('div');
+        divider.style.width = '1px';
+        divider.style.height = '16px';
+        divider.style.backgroundColor = '#6E7990';
+        divider.style.display = 'inline-block';
+        divider.style.margin = '0';
+        divider.style.padding = '0';
+        return divider;
+    }
     private attachListeners(): void {
         document.addEventListener('mouseup', () => this.handleSelectionChange());
         document.addEventListener('mousedown', (e) => this.handleClickOutside(e));
