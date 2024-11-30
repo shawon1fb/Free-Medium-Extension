@@ -2,11 +2,12 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-
+    mode: 'production',
     entry: {
         popup: './src/popup/popup.ts',
         background: './src/background.ts',
-        content: './src/content/content.ts'
+        content: './src/content/content.ts',
+        ollama: './src/utils/ollama.ts'
     },
     module: {
         rules: [

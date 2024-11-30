@@ -18,25 +18,56 @@
     "32": "icon2.png"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "permissions": [
     "contextMenus",
     "storage",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
-  "host_permissions": [],
+  "host_permissions": [
+    "http://localhost:11434/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "exclude_matches": [
+        "https://freedium.com/*",
+        "https://*.medium.com/*",
+        "https://medium.com/*",
+        "https://lifewithoutchildren.com/*",
+        "https://*.lifewithoutchildren.com/*",
+        "https://*.github.com/*",
+        "https://chatgpt.com/*",
+        "https://*.chatgpt.com/*",
+        "https://*.freedium.com/*",
+        "https://claude.ai/*",
+        "https://*.claude.ai/*",
+        "https://chat.openai.com/*"
+
+      ]
     }
   ],
-
   "web_accessible_resources": [
     {
-      "resources": ["edit-04.svg","ion_language-sharp.svg"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "edit-04.svg",
+        "ion_language-sharp.svg"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
-  ]
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src  http://localhost:11434/api/*;",
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src blob: 'self';"
+  }
 }
