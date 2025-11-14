@@ -76,7 +76,7 @@ const openInFreedium = (url: string | undefined, newTab: boolean): void => {
         return;
     }
 
-    const freediumUrl = 'https://freedium.cfd/' + url;
+    const freediumUrl = 'https://freedium-mirror.cfd/' + url;
 
     if (newTab) {
         chrome.tabs.create({
